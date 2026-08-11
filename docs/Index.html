@@ -1,1 +1,712 @@
 
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>برای ماهیِ من 💖</title>
+    
+    <!-- Google Fonts & Tailwind CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP Animation Engine & Canvas Confetti -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow-pink': '0 0 40px -5px rgba(244, 63, 94, 0.45)',
+                        'glow-purple': '0 0 40px -5px rgba(168, 85, 247, 0.45)',
+                        'glow-gold': '0 0 40px -5px rgba(245, 158, 11, 0.45)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Glassmorphism 2.0 Engine */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .glass-panel-dark {
+            background: rgba(18, 11, 31, 0.75);
+            backdrop-filter: blur(28px) saturate(190%);
+            -webkit-backdrop-filter: blur(28px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* ULTRA MODERN CUSTOM INPUT & TYPING ANIMATION */
+        .custom-input-wrapper {
+            position: relative;
+            border-radius: 1.25rem;
+            padding: 3px;
+            background: linear-gradient(135deg, rgba(244,63,94,0.2), rgba(236,72,153,0.1), rgba(255,255,255,0.4));
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .custom-input-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 1.35rem;
+            background: linear-gradient(90deg, #f43f5e, #ec4899, #a855f7, #f43f5e);
+            background-size: 300% 300%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: gradientMove 4s ease infinite;
+        }
+
+        .custom-input-wrapper:focus-within::before {
+            opacity: 1;
+        }
+
+        .custom-input-wrapper:focus-within {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -5px rgba(244, 63, 94, 0.3);
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .custom-textarea {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: none;
+            outline: none !important;
+            width: 100%;
+            border-radius: 1.1rem;
+            padding: 1.25rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #1e293b;
+            transition: background 0.3s ease;
+        }
+
+        .glass-panel-dark .custom-textarea {
+            background: rgba(26, 18, 43, 0.85);
+            color: #f1f5f9;
+        }
+
+        /* Typing Cursor Pulse Indicator */
+        .typing-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #f43f5e;
+            display: inline-block;
+            box-shadow: 0 0 10px #f43f5e;
+            animation: pulseGlow 1s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.4); opacity: 1; }
+        }
+
+        /* Background Particle Canvas */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Candle Flame Physics */
+        @keyframes flameFlicker {
+            0%, 100% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 10px #f59e0b); }
+            50% { transform: scale(1.12) rotate(2deg); filter: drop-shadow(0 0 20px #ef4444); }
+        }
+        .animate-flame {
+            animation: flameFlicker 1s infinite ease-in-out;
+            transform-origin: bottom center;
+        }
+    </style>
+</head>
+<body class="h-full bg-slate-950 text-slate-800 antialiased overflow-hidden select-none">
+
+    <!-- Particle Canvas -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Main Container -->
+    <div id="mainContainer" class="relative z-10 min-h-screen w-full flex items-center justify-center p-4 md:p-8 transition-all duration-1000 bg-gradient-to-br from-pink-100 via-rose-50 to-red-100">
+
+        <!-- Toast Container -->
+        <div id="toastContainer" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-3 pointer-events-none w-full max-w-xs md:max-w-sm px-4"></div>
+
+        <!-- ================= PAGE 1: WELCOME SCREEN ================= -->
+        <div id="introPage" class="w-full max-w-lg glass-panel rounded-3xl p-6 md:p-10 shadow-2xl text-center relative overflow-hidden transition-all duration-500">
+            
+            <!-- Ambient Glow Orbs -->
+            <div class="absolute -top-16 -right-16 w-36 h-36 bg-pink-400/30 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-rose-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Modern Dual-Tone Kitten Vector Icon -->
+            <div class="mx-auto w-24 h-24 mb-6 rounded-3xl bg-gradient-to-tr from-pink-500 to-rose-400 p-0.5 shadow-glow-pink cursor-pointer group" onclick="playCuteSound(880)">
+                <div class="w-full h-full bg-white/90 rounded-[22px] flex items-center justify-center backdrop-blur-md transition-transform duration-300 group-hover:scale-95">
+                    <svg class="w-14 h-14 text-rose-500" viewBox="0 0 64 64" fill="none">
+                        <path d="M16 22L8 10C8 10 20 12 24 16C28 14 36 14 40 16C44 12 56 10 56 10L48 22C54 28 54 38 48 46C40 54 24 54 16 46C10 38 10 28 16 22Z" fill="url(#catGrad)" stroke="#f43f5e" stroke-width="2.5" stroke-linejoin="round"/>
+                        <circle cx="24" cy="30" r="3" fill="#1e293b"/>
+                        <circle cx="40" cy="30" r="3" fill="#1e293b"/>
+                        <ellipse cx="32" cy="36" rx="2.5" ry="1.5" fill="#f43f5e"/>
+                        <path d="M28 40C30 42 34 42 36 40" stroke="#f43f5e" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M14 32H4M14 36H6M50 32H60M50 36H58" stroke="#f43f5e" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="catGrad" x1="8" y1="10" x2="56" y2="54" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#fff5f7"/>
+                                <stop offset="1" stop-color="#ffe4e6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h1 class="text-2xl md:text-3xl font-black text-slate-800 mb-3 leading-snug">
+                سلام <span class="bg-gradient-to-r from-rose-600 to-pink-600 bg-clip-text text-transparent">ماهیِ من</span> 
+            </h1>
+            
+            <p class="text-slate-600 text-base md:text-lg leading-relaxed mb-8 font-medium">
+                ازت چند تا سوال داشتم، دوست دارم جوابشون رو برام اینجا بنویسی...
+            </p>
+
+            <!-- Action Button -->
+            <button onclick="startWizard()" class="w-full py-4 px-8 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:opacity-95 text-white font-bold text-lg rounded-2xl shadow-glow-pink transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-3 group">
+                <span>اگه آماده‌ای بزن بریم</span>
+                <svg class="w-6 h-6 transition-transform duration-300 group-hover:-translate-x-1 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- ================= PAGE 2: WIZARD FLOW ================= -->
+        <div id="wizardPage" class="w-full max-w-xl hidden">
+            
+            <!-- Progress Bar -->
+            <div class="mb-5 flex items-center justify-between px-2">
+                <div id="stepIndicator" class="text-xs md:text-sm font-extrabold tracking-wider text-slate-700 dark:text-slate-200 uppercase flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                    <span>مرحله <span id="currentStepNum">۱</span> از ۳</span>
+                </div>
+                <div class="w-36 md:w-48 h-2 bg-slate-200/80 dark:bg-white/10 rounded-full overflow-hidden backdrop-blur-md">
+                    <div id="progressBar" class="h-full bg-gradient-to-r from-rose-500 to-pink-500 w-1/3 transition-all duration-500 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Dynamic Card -->
+            <div id="wizardCard" class="glass-panel rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden transition-all duration-700">
+                
+                <!-- Badge Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div id="moodBadge" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-rose-100 text-rose-600 flex items-center gap-2 shadow-sm">
+                        <span id="badgeIconContainer" class="w-4 h-4 flex items-center justify-center"></span>
+                        <span id="badgeText">حس شیرین و عاشقانه</span>
+                    </div>
+
+                    <div id="cornerIcon" class="w-8 h-8 flex items-center justify-center text-rose-500"></div>
+                </div>
+
+                <!-- Question Header -->
+                <h2 id="questionTitle" class="text-xl md:text-2xl font-black text-slate-800 mb-6 leading-snug">
+                    سوال اول: منو دوست داری؟
+                </h2>
+
+                <!-- ULTRA-MODERN INPUT CONTAINER -->
+                <div class="mb-6">
+                    <div class="custom-input-wrapper">
+                        <textarea id="answerInput" rows="4" placeholder="جواب دلیت رو برام بنویس..." class="custom-textarea resize-none"></textarea>
+                    </div>
+
+                    <!-- Typing Status & Counter Bar -->
+                    <div class="flex items-center justify-between mt-3 px-2 text-xs">
+                        <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                            <span class="typing-indicator" id="typingDot"></span>
+                            <span id="typingStatus">در حال انتظار برای پاسخ قشنگت...</span>
+                        </div>
+                        <span id="charCounter" class="font-semibold text-slate-400">0 حرف</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex items-center justify-between gap-4 pt-2">
+                    <button id="prevBtn" onclick="prevStep()" class="hidden py-3 px-5 rounded-xl bg-slate-200/60 dark:bg-white/10 hover:bg-slate-300/60 font-bold transition-all text-xs md:text-sm">
+                        قبلی
+                    </button>
+                    <button id="nextBtn" onclick="nextStep()" class="mr-auto py-3.5 px-7 bg-gradient-to-r from-rose-500 to-pink-500 hover:opacity-95 text-white font-bold rounded-xl shadow-glow-pink transition-all flex items-center gap-2 text-sm md:text-base">
+                        <span>مرحله بعدی</span>
+                        <svg class="w-5 h-5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 3: BIRTHDAY CELEBRATION ================= -->
+        <div id="birthdayPage" class="w-full max-w-2xl hidden text-center relative">
+            <div class="glass-panel rounded-3xl p-6 md:p-12 shadow-2xl relative overflow-hidden border border-white/80">
+                
+                <!-- Modern Kitten Header Badge -->
+                <div class="flex justify-center items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                    <span class="px-5 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black text-xs md:text-sm tracking-wider shadow-md">
+                        HAPPY BIRTHDAY
+                    </span>
+                    <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Main Celebration Title -->
+                <h1 class="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-4 leading-tight">
+                    تولدت مبارک <span class="bg-gradient-to-r from-rose-600 via-pink-600 to-red-600 bg-clip-text text-transparent">ماهیِ من!</span> 
+                </h1>
+                
+                <p class="text-slate-600 text-sm md:text-lg mb-8 max-w-md mx-auto font-medium">
+                    امیدوارم امسال قشنگ‌ترین سال زندگیت باشه و به تک تک آرزوهای خوشگلت برسی!
+                </p>
+
+                <!-- Interactive Modern Cake SVG -->
+                <div class="relative w-44 h-44 md:w-52 md:h-52 mx-auto mb-8 cursor-pointer group" onclick="blowCandle()" title="برای فوت کردن شمع کلیک کن!">
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-2xl transition-transform duration-300 group-hover:scale-105">
+                        <!-- Cake Base -->
+                        <path d="M 30 140 Q 100 160 170 140 L 170 170 Q 100 190 30 170 Z" fill="#f43f5e" />
+                        <path d="M 30 110 Q 100 130 170 110 L 170 140 Q 100 160 30 140 Z" fill="#fb7185" />
+                        <path d="M 30 110 Q 100 130 170 110 C 170 90 150 80 130 90 C 110 70 90 70 70 90 C 50 80 30 90 30 110 Z" fill="#ffffff" />
+                        <!-- Decorative Drips -->
+                        <circle cx="50" cy="118" r="4" fill="#f43f5e"/>
+                        <circle cx="85" cy="124" r="5" fill="#f43f5e"/>
+                        <circle cx="120" cy="124" r="5" fill="#f43f5e"/>
+                        <circle cx="150" cy="118" r="4" fill="#f43f5e"/>
+                        <!-- Candle -->
+                        <rect x="96" y="45" width="8" height="42" rx="3" fill="#facc15" />
+                        <!-- Flame -->
+                        <g id="candleFlame" class="animate-flame">
+                            <path d="M 100 18 Q 112 35 100 45 Q 88 35 100 18 Z" fill="#f97316" />
+                            <path d="M 100 25 Q 106 35 100 42 Q 94 35 100 25 Z" fill="#fef08a" />
+                        </g>
+                    </svg>
+
+                    <div id="candleHint" class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-rose-600 shadow-md border border-rose-200 flex items-center gap-1.5 whitespace-nowrap">
+                        <svg class="w-3.5 h-3.5 text-amber-500 animate-spin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        <span>روی شمع بزن تا فوتش کنی!</span>
+                    </div>
+                </div>
+
+                <!-- Modern Features Grid -->
+                <div class="grid grid-cols-3 gap-3 mb-8">
+                    <div class="p-3.5 rounded-2xl bg-white/60 border border-pink-100 flex flex-col items-center gap-1">
+                        <svg class="w-6 h-6 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                        <span class="text-xs font-bold text-slate-700">پر از سورپرایز</span>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-white/60 border border-rose-100 flex flex-col items-center gap-1">
+                        <svg class="w-6 h-6 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <span class="text-xs font-bold text-slate-700">یک دنیا عشق</span>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-white/60 border border-purple-100 flex flex-col items-center gap-1">
+                        <svg class="w-6 h-6 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        <span class="text-xs font-bold text-slate-700">رویایی و خاص</span>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button onclick="openAnswersModal()" class="w-full py-4 px-8 bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 hover:opacity-95 text-white font-bold rounded-2xl shadow-glow-pink transition-all flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>مشاهده جواب‌های قشنگت</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= ANSWERS SUMMARY MODAL ================= -->
+    <div id="answersModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md hidden opacity-0 transition-opacity duration-300">
+        <div class="w-full max-w-lg glass-panel rounded-3xl p-6 md:p-8 shadow-2xl relative border border-white/50 transform scale-95 transition-transform duration-300" id="answersModalCard">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-rose-100">
+                <h3 class="text-lg md:text-xl font-black text-slate-800 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-rose-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span>جواب‌های ماهیِ من</span>
+                </h3>
+                <button onclick="closeAnswersModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500 font-bold transition-all">✕</button>
+            </div>
+
+            <div class="space-y-4 text-right max-h-[60vh] overflow-y-auto pr-1">
+                <div class="p-4 rounded-2xl bg-rose-50/80 border border-rose-100">
+                    <p class="text-xs font-bold text-rose-600 mb-1">سوال ۱: منو دوست داری؟</p>
+                    <p id="summaryA1" class="text-slate-800 font-medium text-sm leading-relaxed">---</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-purple-50/80 border border-purple-100">
+                    <p class="text-xs font-bold text-purple-600 mb-1">سوال ۲: من برای تو چه جایگاهی دارم؟</p>
+                    <p id="summaryA2" class="text-slate-800 font-medium text-sm leading-relaxed">---</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-red-50/80 border border-red-100">
+                    <p class="text-xs font-bold text-red-600 mb-1">سوال ۳: به غیر از من با کس دیگه ای در ارتباطی که حسی داشته باشی بهش؟</p>
+                    <p id="summaryA3" class="text-slate-800 font-medium text-sm leading-relaxed">---</p>
+                </div>
+            </div>
+
+            <button onclick="closeAnswersModal()" class="w-full mt-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">
+                بستن
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Web Audio API Synth Engine
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playCuteSound(freq = 587.33) {
+            try {
+                if(!audioCtx) audioCtx = new AudioCtx();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            } catch(e){}
+        }
+
+        // Vector Icons Database
+        const iconsSVG = {
+            heart: `<svg class="w-5 h-5 text-rose-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
+            crown: `<svg class="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`,
+            paw: `<svg class="w-5 h-5 text-rose-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 11.5c-2.5 0-4.5 1.8-4.5 4 0 1.5.8 2.8 2 3.5.8.5 1.6 1 2.5 1s1.7-.5 2.5-1c1.2-.7 2-2 2-3.5 0-2.2-2-4-4.5-4zm-5-3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm8 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>`,
+            sparkle: `<svg class="w-6 h-6 text-amber-400 animate-spin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`
+        };
+
+        // App State
+        const state = {
+            step: 1,
+            answers: { q1: '', q2: '', q3: '' },
+            isCandleBlown: false
+        };
+
+        // Wizard Steps Config
+        const stepConfigs = [
+            {
+                step: 1,
+                title: "سوال اول: منو دوست داری؟",
+                placeholder: "با تموم وجودت برام بنویس...",
+                badgeText: "حس شیرین و عاشقانه",
+                badgeIcon: iconsSVG.heart,
+                badgeClass: "bg-rose-100 text-rose-600",
+                cornerIcon: iconsSVG.heart,
+                cardClass: "glass-panel",
+                bgGradient: "from-pink-100 via-rose-50 to-red-100",
+                textColor: "text-slate-800"
+            },
+            {
+                step: 2,
+                title: "سوال ۲: من برای تو چه جایگاهی دارم؟",
+                placeholder: "توی قلبت چه جایی دارم؟ برام بنویس...",
+                badgeText: "حس عمیق و سلطنتی",
+                badgeIcon: iconsSVG.crown,
+                badgeClass: "bg-purple-900/80 text-purple-200 border border-purple-400/30",
+                cornerIcon: iconsSVG.sparkle,
+                cardClass: "glass-panel-dark text-white",
+                bgGradient: "from-slate-950 via-purple-950 to-pink-950",
+                textColor: "text-purple-100"
+            },
+            {
+                step: 3,
+                title: "سوال ۳: به غیر از من با کس دیگه ای در ارتباطی که حسی داشته باشی بهش؟",
+                placeholder: "صادقانه و شیطنت‌آمیز بنویس ببینم...",
+                badgeText: "حس شیطنت و صمیمیت",
+                badgeIcon: iconsSVG.paw,
+                badgeClass: "bg-red-100 text-red-600",
+                cornerIcon: iconsSVG.paw,
+                cardClass: "glass-panel",
+                bgGradient: "from-red-100 via-rose-100 to-pink-100",
+                textColor: "text-slate-800"
+            }
+        ];
+
+        // Toast Handler
+        function showToast(msg, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `px-4 py-3 rounded-2xl shadow-2xl text-xs md:text-sm font-bold flex items-center gap-2 transform transition-all duration-300 -translate-y-4 opacity-0 backdrop-blur-md ${
+                type === 'error' 
+                ? 'bg-red-500/90 text-white shadow-red-500/30' 
+                : 'bg-slate-900/90 text-white shadow-slate-900/30'
+            }`;
+            toast.innerHTML = `<span class="w-2 h-2 rounded-full ${type === 'error' ? 'bg-white' : 'bg-rose-400'}"></span> <span>${msg}</span>`;
+            
+            const container = document.getElementById('toastContainer');
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('-translate-y-4', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Start Wizard Function
+        function startWizard() {
+            playCuteSound(659.25);
+            gsap.to('#introPage', {
+                duration: 0.4,
+                scale: 0.92,
+                opacity: 0,
+                onComplete: () => {
+                    document.getElementById('introPage').classList.add('hidden');
+                    document.getElementById('wizardPage').classList.remove('hidden');
+                    renderStep(1);
+                    gsap.fromTo('#wizardPage', { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.5 });
+                }
+            });
+        }
+
+        // Render Wizard Step
+        function renderStep(stepNum) {
+            const config = stepConfigs[stepNum - 1];
+            state.step = stepNum;
+
+            const textarea = document.getElementById('answerInput');
+            textarea.value = state.answers[`q${stepNum}`] || '';
+            updateTypingState();
+
+            textarea.oninput = () => {
+                updateTypingState();
+                playCuteSound(800 + textarea.value.length * 5);
+            };
+
+            // Background Theme Transition
+            document.getElementById('mainContainer').className = `relative z-10 min-h-screen w-full flex items-center justify-center p-4 md:p-8 transition-all duration-1000 bg-gradient-to-br ${config.bgGradient}`;
+
+            // Card Style Update
+            const card = document.getElementById('wizardCard');
+            card.className = `${config.cardClass} rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden transition-all duration-700`;
+
+            document.getElementById('currentStepNum').innerText = stepNum;
+            document.getElementById('progressBar').style.width = `${(stepNum / 3) * 100}%`;
+
+            document.getElementById('badgeIconContainer').innerHTML = config.badgeIcon;
+            document.getElementById('badgeText').innerText = config.badgeText;
+            document.getElementById('moodBadge').className = `px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-2 shadow-sm ${config.badgeClass}`;
+
+            document.getElementById('cornerIcon').innerHTML = config.cornerIcon;
+            document.getElementById('questionTitle').innerText = config.title;
+            document.getElementById('questionTitle').className = `text-xl md:text-2xl font-black mb-6 leading-snug ${config.textColor}`;
+
+            textarea.placeholder = config.placeholder;
+
+            const prevBtn = document.getElementById('prevBtn');
+            if (stepNum > 1) prevBtn.classList.remove('hidden');
+            else prevBtn.classList.add('hidden');
+
+            const nextBtnSpan = document.querySelector('#nextBtn span');
+            nextBtnSpan.innerText = stepNum === 3 ? "ثبت و دیدن سورپرایز 🎉" : "مرحله بعدی";
+
+            gsap.fromTo(card, { scale: 0.96, opacity: 0.8 }, { scale: 1, opacity: 1, duration: 0.4 });
+        }
+
+        function updateTypingState() {
+            const val = document.getElementById('answerInput').value;
+            const counter = document.getElementById('charCounter');
+            const status = document.getElementById('typingStatus');
+
+            counter.innerText = `${val.length} حرف`;
+
+            if (val.length > 0) {
+                status.innerText = "در حال نوشتن پاسخ زیبات...";
+                status.className = "text-rose-500 font-bold";
+            } else {
+                status.innerText = "در حال انتظار برای پاسخ قشنگت...";
+                status.className = "text-slate-400";
+            }
+        }
+
+        function nextStep() {
+            const val = document.getElementById('answerInput').value.trim();
+            if (!val) {
+                showToast("لطفاً حتماً یه چیزی برام بنویس ماهیم! 🥺", "error");
+                playCuteSound(300);
+                return;
+            }
+
+            state.answers[`q${state.step}`] = val;
+            playCuteSound(783.99);
+
+            if (state.step < 3) {
+                showToast("جوابت ثبت شد قشنگم ✨");
+                renderStep(state.step + 1);
+            } else {
+                showFinalCelebration();
+            }
+        }
+
+        function prevStep() {
+            if (state.step > 1) {
+                playCuteSound(523.25);
+                renderStep(state.step - 1);
+            }
+        }
+
+        function showFinalCelebration() {
+            gsap.to('#wizardPage', {
+                duration: 0.4,
+                opacity: 0,
+                y: -15,
+                onComplete: () => {
+                    document.getElementById('wizardPage').classList.add('hidden');
+                    document.getElementById('birthdayPage').classList.remove('hidden');
+                    document.getElementById('mainContainer').className = "relative z-10 min-h-screen w-full flex items-center justify-center p-4 md:p-8 transition-all duration-1000 bg-gradient-to-br from-pink-200 via-rose-100 to-red-200";
+
+                    gsap.fromTo('#birthdayPage', { scale: 0.85, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.5)" });
+                    triggerConfetti();
+                }
+            });
+        }
+
+        function blowCandle() {
+            if (state.isCandleBlown) {
+                triggerConfetti();
+                playCuteSound(1046.5);
+                return;
+            }
+
+            state.isCandleBlown = true;
+            const flame = document.getElementById('candleFlame');
+            const hint = document.getElementById('candleHint');
+
+            gsap.to(flame, {
+                scale: 0,
+                opacity: 0,
+                duration: 0.4,
+                onComplete: () => {
+                    hint.innerHTML = `<span class="text-rose-600 font-bold">✨ آرزوهات برآورده شد ماهیم! ✨</span>`;
+                    triggerConfetti();
+                    showToast("آرزو کردی؟ تولدت مبارک فرشته من! 🎉🎂");
+                }
+            });
+        }
+
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#f43f5e', '#ec4899', '#a855f7', '#ffffff', '#facc15']
+                });
+            }
+        }
+
+        function openAnswersModal() {
+            document.getElementById('summaryA1').innerText = state.answers.q1 || 'پاسخی ثبت نشده';
+            document.getElementById('summaryA2').innerText = state.answers.q2 || 'پاسخی ثبت نشده';
+            document.getElementById('summaryA3').innerText = state.answers.q3 || 'پاسخی ثبت نشده';
+
+            const modal = document.getElementById('answersModal');
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                document.getElementById('answersModalCard').classList.remove('scale-95');
+            });
+            playCuteSound(659.25);
+        }
+
+        function closeAnswersModal() {
+            const modal = document.getElementById('answersModal');
+            modal.classList.add('opacity-0');
+            document.getElementById('answersModalCard').classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Particle System
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class FloatingHeart {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 50;
+                this.size = Math.random() * 12 + 8;
+                this.speedY = Math.random() * 1.2 + 0.4;
+                this.opacity = Math.random() * 0.4 + 0.15;
+                this.rotation = Math.random() * Math.PI * 2;
+            }
+            update() {
+                this.y -= this.speedY;
+                if (this.y < -30) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = '#f43f5e';
+                ctx.beginPath();
+                const h = this.size * 0.3;
+                ctx.moveTo(0, h);
+                ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, h);
+                ctx.bezierCurveTo(-this.size / 2, (this.size + h) / 2, 0, this.size, 0, this.size);
+                ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + h) / 2, this.size / 2, h);
+                ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, h);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 20; i++) particles.push(new FloatingHeart());
+        function renderParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(renderParticles);
+        }
+        renderParticles();
+    </script>
+</body>
+</html>
