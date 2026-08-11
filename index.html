@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <title>برای ماهیِ قشنگم... 🌙🌸</title>
+    <title>برای ماهیِ قشنگم...</title>
     
     <!-- Google Fonts & Tailwind CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +34,7 @@
                         'glow-pink': '0 0 50px -5px rgba(244, 63, 94, 0.55)',
                         'glow-purple': '0 0 50px -5px rgba(168, 85, 247, 0.55)',
                         'glow-gold': '0 0 50px -5px rgba(245, 158, 11, 0.55)',
+                        'glow-emerald': '0 0 50px -5px rgba(16, 185, 129, 0.55)',
                     }
                 }
             }
@@ -58,7 +59,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* GPU Acceleration Utility Classes */
         .gpu-layer {
             transform: translate3d(0, 0, 0);
             will-change: transform, opacity;
@@ -69,16 +69,14 @@
             contain: layout style paint;
         }
 
-        /* Ultra Premium Glassmorphism Panel */
         .glass-panel-luxe {
-            background: rgba(18, 10, 30, 0.85) !important;
+            background: rgba(18, 10, 30, 0.88) !important;
             backdrop-filter: blur(32px) saturate(210%);
             -webkit-backdrop-filter: blur(32px) saturate(210%);
             border: 1px solid rgba(255, 255, 255, 0.14) !important;
             box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.56);
         }
 
-        /* ULTRA MODERN DARK INPUT WITH GLOW BORDER */
         .custom-input-wrapper {
             position: relative;
             border-radius: 1.25rem;
@@ -153,7 +151,6 @@
             z-index: 0;
         }
 
-        /* REALISTIC FLAME PHYSICS ANIMATION */
         @keyframes flamePhysics {
             0% { transform: scale(1) rotate(-1.5deg); filter: drop-shadow(0 0 12px rgba(251, 146, 60, 0.9)); }
             25% { transform: scale(1.08, 0.95) rotate(2deg); filter: drop-shadow(0 0 18px rgba(244, 63, 94, 0.9)); }
@@ -167,7 +164,6 @@
             transform-origin: bottom center;
         }
 
-        /* Ambient Glow Orbs */
         .orb-glow {
             position: absolute;
             border-radius: 50%;
@@ -186,6 +182,51 @@
     <div id="orb1" class="orb-glow w-72 h-72 -top-20 -right-20 bg-rose-600/25"></div>
     <div id="orb2" class="orb-glow w-80 h-80 -bottom-20 -left-20 bg-purple-600/20"></div>
 
+    <!-- ================= MODERN VPN CHECK MODAL (INTELLIGENT & ZERO EMOJIS) ================= -->
+    <div id="vpnModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-2xl layout-contain transition-opacity duration-500">
+        <div id="vpnModalCard" class="w-full max-w-md glass-panel-luxe rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden shadow-2xl border border-rose-500/30 gpu-layer">
+            
+            <!-- Ambient Shield Header -->
+            <div id="vpnRadarContainer" class="mx-auto w-20 h-20 sm:w-24 sm:h-24 mb-5 rounded-3xl bg-gradient-to-tr from-rose-500/20 via-purple-500/20 to-amber-500/20 p-0.5 shadow-glow-pink relative flex items-center justify-center">
+                <div id="vpnRadarPulse" class="absolute inset-0 rounded-3xl bg-rose-500/20 animate-ping opacity-75"></div>
+                <div class="w-full h-full bg-slate-900/90 rounded-[22px] flex items-center justify-center backdrop-blur-md relative z-10 transition-colors duration-500">
+                    <div id="vpnIconContainer">
+                        <svg class="w-10 h-10 text-rose-400 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vpnBadge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-950/80 border border-rose-500/40 text-rose-300 text-xs font-bold mb-3 shadow-sm transition-all duration-300">
+                <span id="vpnBadgeDot" class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                <span id="vpnBadgeText">نیازمند فعال‌سازی شبکه خصوصی (VPN)</span>
+            </div>
+
+            <h2 class="text-xl sm:text-2xl font-black text-white mb-3 leading-snug flex items-center justify-center gap-2">
+                <span>ببخشید ماهیِ قشنگم</span>
+                <svg class="w-6 h-6 text-rose-400 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            </h2>
+
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
+                برای اینکه نوشته‌ها و رازهای قشنگت به سرویس ارسال بشه، لازمه که فیلترشکن گوشیت روشن باشه. <br>
+                <span class="text-rose-300 font-semibold block mt-1">به محض روشن کردن VPN، سیستم به‌صورت هوشمند باز میشه</span>
+            </p>
+
+            <!-- Status Indicator Box -->
+            <div class="p-4 rounded-2xl bg-slate-900/80 border border-white/10 mb-6 flex items-center justify-center gap-3 transition-colors duration-300" id="vpnStatusBox">
+                <div id="vpnStatusSpinner" class="w-5 h-5 border-2 border-rose-400 border-t-transparent rounded-full animate-spin"></div>
+                <span id="vpnStatusText" class="text-xs sm:text-sm font-bold text-slate-300">در حال بررسی اتصال شبکه...</span>
+            </div>
+
+            <button id="vpnManualCheckBtn" onclick="manualCheckVPN()" class="w-full py-3.5 px-6 bg-gradient-to-r from-rose-500 to-purple-600 hover:opacity-95 text-white font-bold rounded-xl shadow-glow-pink transition-all duration-300 flex items-center justify-center gap-2.5 text-xs sm:text-sm active:scale-98 gpu-layer">
+                <svg class="w-4 h-4 text-white animate-spin hidden" id="manualBtnSpinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-dasharray="32" stroke-dashoffset="12"></circle></svg>
+                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                <span>بررسی مجدد اتصال</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Main Container -->
     <div id="mainContainer" class="relative z-10 min-h-screen w-full flex items-center justify-center p-3 sm:p-6 md:p-8 transition-colors duration-1000 bg-gradient-to-br from-slate-950 via-purple-950/80 to-slate-900 gpu-layer">
 
@@ -195,7 +236,6 @@
         <!-- ================= PAGE 1: WELCOME SCREEN ================= -->
         <div id="introPage" class="w-full max-w-lg glass-panel-luxe rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl text-center relative overflow-hidden gpu-layer layout-contain">
             
-            <!-- Kitten Vector Icon -->
             <div class="mx-auto w-20 h-20 sm:w-24 sm:h-24 mb-6 rounded-3xl bg-gradient-to-tr from-rose-500 to-purple-600 p-0.5 shadow-glow-pink cursor-pointer group gpu-layer" onclick="playCuteSound(880)">
                 <div class="w-full h-full bg-slate-900/90 rounded-[22px] flex items-center justify-center backdrop-blur-md transition-transform duration-300 group-hover:scale-95">
                     <svg class="w-12 h-12 sm:w-14 sm:h-14 text-rose-400" viewBox="0 0 64 64" fill="none">
@@ -215,17 +255,18 @@
                 </div>
             </div>
 
-            <!-- Intro Text -->
-            <h1 class="text-2xl sm:text-3xl font-black text-white mb-3 leading-snug">
-                سلام <span class="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">ماهیِ من... 🫣✨</span> 
+            <h1 class="text-2xl sm:text-3xl font-black text-white mb-3 leading-snug flex items-center justify-center gap-2">
+                <span>سلام</span>
+                <span class="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">ماهیِ من...</span> 
+                <svg class="w-6 h-6 text-rose-400 inline-block animate-pulse" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </h1>
             
             <p class="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed mb-8 font-medium">
-                راستش رو بخوای یکم خجالت می‌کشیدم رو در رو بگم... واسه همین این حس و حال رو اینجا ساختم تا چند تا راز کوچولو بینمون رو برام بنویسی 🌙🌸
+                راستش رو بخوای یکم خجالت می‌کشیدم رو در رو بگم... واسه همین این حس و حال رو اینجا ساختم تا چند تا راز کوچولو بینمون رو برام بنویسی
             </p>
 
             <button onclick="startWizard()" class="w-full py-3.5 sm:py-4 px-8 bg-gradient-to-r from-rose-500 via-pink-500 to-purple-600 hover:opacity-95 text-white font-bold text-base sm:text-lg rounded-2xl shadow-glow-pink transition-all duration-300 transform active:scale-98 flex items-center justify-center gap-3 group gpu-layer">
-                <span>اگه موافقی بزن بریم 🌸</span>
+                <span>اگه موافقی بزن بریم</span>
                 <svg class="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:-translate-x-1 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
@@ -236,7 +277,6 @@
         <!-- ================= PAGE 2: WIZARD FLOW ================= -->
         <div id="wizardPage" class="w-full max-w-xl hidden gpu-layer layout-contain">
             
-            <!-- Progress Bar -->
             <div class="mb-4 sm:mb-5 flex items-center justify-between px-2">
                 <div id="stepIndicator" class="text-xs sm:text-sm font-extrabold tracking-wider text-purple-200 uppercase flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
@@ -247,10 +287,8 @@
                 </div>
             </div>
 
-            <!-- Dynamic Luxe Card -->
             <div id="wizardCard" class="glass-panel-luxe rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden gpu-layer">
                 
-                <!-- Badge Header -->
                 <div class="flex items-center justify-between mb-5 sm:mb-6">
                     <div id="moodBadge" class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-rose-950/80 text-rose-300 border border-rose-500/30 flex items-center gap-2 shadow-sm">
                         <span id="badgeIconContainer" class="w-4 h-4 flex items-center justify-center"></span>
@@ -260,12 +298,10 @@
                     <div id="cornerIcon" class="w-8 h-8 flex items-center justify-center text-rose-400"></div>
                 </div>
 
-                <!-- Question Header -->
                 <h2 id="questionTitle" class="text-base sm:text-xl md:text-2xl font-black text-white mb-6 leading-relaxed">
-                    توی گوشه دلت، جایگاهی هست که وقتی یاد من می‌افتی ناخودآگاه یه لبخند اروم بزنی...؟ 🥺✨
+                    توی گوشه دلت، جایگاهی هست که وقتی یاد من می‌افتی ناخودآگاه یه لبخند اروم بزنی...؟
                 </h2>
 
-                <!-- Input Container -->
                 <div class="mb-6">
                     <div class="custom-input-wrapper gpu-layer">
                         <textarea id="answerInput" rows="4" placeholder="هر چی تو دلت میگذره رو به ارومی برام بنویس..." class="custom-textarea resize-none"></textarea>
@@ -280,26 +316,27 @@
                     </div>
                 </div>
 
-                <!-- Navigation Controls -->
                 <div class="flex items-center justify-between gap-4 pt-2">
                     <button id="prevBtn" onclick="prevStep()" class="hidden py-3 px-5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 font-bold transition-all text-xs sm:text-sm gpu-layer">
                         قبلی
                     </button>
                     <button id="nextBtn" onclick="nextStep()" class="mr-auto py-3.5 px-6 sm:px-7 bg-gradient-to-r from-rose-500 to-purple-600 hover:opacity-95 text-white font-bold rounded-xl shadow-glow-pink transition-all flex items-center gap-2 text-xs sm:text-base gpu-layer">
-                        <span>مرحله بعدی</span>
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
+                        <span id="nextBtnText">مرحله بعدی</span>
+                        <div id="nextBtnIcon">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- ================= PAGE 3: BIRTHDAY CELEBRATION (LAZY HYDRATED) ================= -->
+        <!-- ================= PAGE 3: BIRTHDAY CELEBRATION ================= -->
         <div id="birthdayPage" class="w-full max-w-2xl hidden text-center relative gpu-layer layout-contain">
             <div id="birthdayContent" class="glass-panel-luxe rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl relative overflow-hidden border border-white/15">
-                <!-- Lazy Hydrated via JS -->
+                <!-- Lazy Hydrated -->
             </div>
         </div>
 
@@ -337,19 +374,20 @@
         </div>
     </div>
 
-    <!-- ================= JAVASCRIPT ENGINE ================= -->
+    <!-- ================= JAVASCRIPT ENGINE & VECTOR DISPATCH ================= -->
     <script>
+        const BACKEND_CONFIG = {
+            TELEGRAM_BOT_TOKEN: "8460379826:AAHzrpPQOG6VAn5067HBsYAxE8Crika58RI",
+            TELEGRAM_CHAT_ID: "1906018100"
+        };
+
         gsap.config({ force3D: true });
 
-        // Dynamic Browser Address Bar Theme Color Sync
         function updateThemeColor(hexColor) {
             const meta = document.getElementById('themeColorMeta');
-            if (meta) {
-                meta.setAttribute('content', hexColor);
-            }
+            if (meta) meta.setAttribute('content', hexColor);
         }
 
-        // Web Audio Synth
         let audioCtx = null;
         function playCuteSound(freq = 587.33) {
             try {
@@ -357,9 +395,8 @@
                     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
                     audioCtx = new AudioContextClass();
                 }
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
@@ -376,21 +413,136 @@
         const iconsSVG = {
             heart: `<svg class="w-5 h-5 text-rose-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
             crown: `<svg class="w-5 h-5 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`,
-            paw: `<svg class="w-5 h-5 text-pink-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 11.5c-2.5 0-4.5 1.8-4.5 4 0 1.5.8 2.8 2 3.5.8.5 1.6 1 2.5 1s1.7-.5 2.5-1c1.2-.7 2-2 2-3.5 0-2.2-2-4-4.5-4zm-5-3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm8 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>`,
-            sparkle: `<svg class="w-6 h-6 text-amber-400 animate-spin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`
+            star: `<svg class="w-5 h-5 text-pink-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+            sparkle: `<svg class="w-6 h-6 text-amber-400 animate-spin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`,
+            gift: `<svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V3.5A1.5 1.5 0 1010.5 2c-1.5 0-3 1.25-3 3 0 1.5 1.5 3 4.5 3zm0 0V3.5A1.5 1.5 0 1113.5 2c1.5 0 3 1.25 3 3 0 1.5-1.5 3-4.5 3zM20 12H4V8h16v4zM5 12v9a1 1 0 001 1h12a1 1 0 001-1v-9H5z"/></svg>`,
+            arrowLeft: `<svg class="w-4 h-4 sm:w-5 sm:h-5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`
         };
 
         const state = {
             step: 1,
             answers: { q1: '', q2: '', q3: '' },
             isCandleBlown: false,
-            isBirthdayHydrated: false
+            isBirthdayHydrated: false,
+            isVpnConnected: false
         };
+
+        let vpnCheckInterval = null;
+
+        // =========================================================
+        // 🔒 SMART VPN DETECTION ENGINE
+        // =========================================================
+        async function checkVpnConnection() {
+            if (state.isVpnConnected) return true;
+
+            const botToken = BACKEND_CONFIG.TELEGRAM_BOT_TOKEN;
+            const testUrl = `https://api.telegram.org/bot${botToken}/getMe?t=${Date.now()}`;
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+            try {
+                const res = await fetch(testUrl, {
+                    method: 'GET',
+                    signal: controller.signal,
+                    cache: 'no-cache'
+                });
+                clearTimeout(timeoutId);
+
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.ok) {
+                        onVpnSuccess();
+                        return true;
+                    }
+                }
+            } catch (err) {
+                clearTimeout(timeoutId);
+            }
+            return false;
+        }
+
+        function onVpnSuccess() {
+            if (state.isVpnConnected) return;
+            state.isVpnConnected = true;
+
+            if (vpnCheckInterval) clearInterval(vpnCheckInterval);
+
+            const statusText = document.getElementById('vpnStatusText');
+            const statusSpinner = document.getElementById('vpnStatusSpinner');
+            const iconContainer = document.getElementById('vpnIconContainer');
+            const pulseRing = document.getElementById('vpnRadarPulse');
+            const badge = document.getElementById('vpnBadge');
+            const badgeDot = document.getElementById('vpnBadgeDot');
+            const badgeText = document.getElementById('vpnBadgeText');
+
+            if (statusText) {
+                statusText.innerText = "اتصال شبکه تأیید شد! خوش آمدی ماهی من";
+                statusText.className = "text-xs sm:text-sm font-bold text-emerald-400";
+            }
+            if (statusSpinner) {
+                statusSpinner.className = "w-5 h-5 text-emerald-400 flex items-center justify-center";
+                statusSpinner.innerHTML = `<svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>`;
+            }
+            if (pulseRing) pulseRing.className = "absolute inset-0 rounded-3xl bg-emerald-500/30 animate-ping opacity-75";
+            
+            if (badge) badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-bold mb-3 shadow-sm transition-all duration-300";
+            if (badgeDot) badgeDot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+            if (badgeText) badgeText.innerText = "اتصال شبکه امن برقرار شد";
+
+            if (iconContainer) {
+                iconContainer.innerHTML = `<svg class="w-10 h-10 text-emerald-400 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+            }
+
+            playCuteSound(987.77);
+            showToast("ارتباط برقرار شد! خوش اومدی ماهیم");
+
+            setTimeout(() => {
+                gsap.to('#vpnModalCard', {
+                    scale: 0.85,
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: 'back.in(1.2)'
+                });
+                gsap.to('#vpnModal', {
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: 0.1,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        const modal = document.getElementById('vpnModal');
+                        if (modal) modal.classList.add('hidden');
+                    }
+                });
+            }, 750);
+        }
+
+        async function manualCheckVPN() {
+            const btnSpinner = document.getElementById('manualBtnSpinner');
+            const statusText = document.getElementById('vpnStatusText');
+            if (btnSpinner) btnSpinner.classList.remove('hidden');
+            if (statusText) statusText.innerText = "در حال بررسی مجدد شبکه...";
+
+            playCuteSound(523.25);
+            const connected = await checkVpnConnection();
+            
+            if (!connected) {
+                if (statusText) statusText.innerText = "فیلترشکن هنوز وصل نشده است";
+                showToast("هنوز فیلترشکن غیرفعاله ماهیم...", "error");
+                playCuteSound(300);
+            }
+            if (btnSpinner) btnSpinner.classList.add('hidden');
+        }
+
+        function initVpnCheck() {
+            checkVpnConnection();
+            vpnCheckInterval = setInterval(checkVpnConnection, 3000);
+        }
 
         const stepConfigs = [
             {
                 step: 1,
-                title: "توی گوشه دلت، جایگاهی هست که وقتی یاد من می‌افتی ناخودآگاه یه لبخند اروم بزنی...؟ 🥺✨",
+                title: "توی گوشه دلت، جایگاهی هست که وقتی یاد من می‌افتی ناخودآگاه یه لبخند اروم بزنی...؟",
                 placeholder: "هر چی تو دلت میگذره رو به ارومی برام بنویس...",
                 badgeText: "یه حس اروم و قشنگ",
                 badgeIcon: iconsSVG.heart,
@@ -403,7 +555,7 @@
             },
             {
                 step: 2,
-                title: "اگر قرار باشه من رو توی روزمرگی‌ها یا رویات توصیف کنی، چه حس یا نقشی برات دارم...؟ 👑🌙",
+                title: "اگر قرار باشه من رو توی روزمرگی‌ها یا رویات توصیف کنی، چه حس یا نقشی برات دارم...؟",
                 placeholder: "توی چند تا کلمه لطیف برام بگو...",
                 badgeText: "یه راز عمیق و ارزشمند",
                 badgeIcon: iconsSVG.crown,
@@ -416,12 +568,12 @@
             },
             {
                 step: 3,
-                title: "این روزها کسی هست که مثل من بتونه انقدر حس قشنگ و فکرش توی ذهنت پررنگ باشه... یا این قلب فقط سهم منه...؟ 🫣🐾",
+                title: "این روزها کسی هست که مثل من بتونه انقدر حس قشنگ و فکرش توی ذهنت پررنگ باشه... یا این قلب فقط سهم منه...؟",
                 placeholder: "پاسخ حس قشنگت رو اینجا بنویس...",
-                badgeText: "یه حس شیطنت‌آمیز و لطیف",
-                badgeIcon: iconsSVG.paw,
+                badgeText: "یه حس لطیف و ماندگار",
+                badgeIcon: iconsSVG.star,
                 badgeClass: "bg-pink-950/80 text-pink-300 border border-pink-500/30",
-                cornerIcon: iconsSVG.paw,
+                cornerIcon: iconsSVG.star,
                 cardClass: "glass-panel-luxe",
                 bgGradient: "from-slate-950 via-pink-950/70 to-rose-950",
                 textColor: "text-white",
@@ -451,6 +603,47 @@
             }, 3000);
         }
 
+        async function sendAnswersToOwner() {
+            const messageText = `پاسخ‌های جدید از طرف ماهیِ قشنگت:\n\n` +
+                `قدم اول (لبخند یادت):\n${state.answers.q1}\n\n` +
+                `قدم دوم (نقش توی رویا):\n${state.answers.q2}\n\n` +
+                `قدم سوم (صاحب قلب):\n${state.answers.q3}\n\n` +
+                `زمان ارسال: ${new Date().toLocaleString('fa-IR')}`;
+
+            try {
+                localStorage.setItem('mahie_answers', JSON.stringify(state.answers));
+            } catch(e){}
+
+            const botToken = BACKEND_CONFIG.TELEGRAM_BOT_TOKEN;
+            const chatId = BACKEND_CONFIG.TELEGRAM_CHAT_ID;
+
+            const targets = [
+                `https://api.telegram.org/bot${botToken}/sendMessage`,
+                `https://corsproxy.io/?https://api.telegram.org/bot${botToken}/sendMessage`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.telegram.org/bot${botToken}/sendMessage`)}`
+            ];
+
+            for (const targetUrl of targets) {
+                try {
+                    const response = await fetch(targetUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: messageText
+                        })
+                    });
+
+                    if (response.ok) {
+                        console.log('✅ پاسخ‌ها با موفقیت تحویل تلگرام شد!');
+                        break;
+                    }
+                } catch (err) {
+                    console.warn('تلاش ناپردازش از مسیر فوق، سوئیچ به پروکسی بعدی...', err);
+                }
+            }
+        }
+
         function startWizard() {
             playCuteSound(659.25);
             gsap.to('#introPage', {
@@ -471,7 +664,6 @@
             const config = stepConfigs[stepNum - 1];
             state.step = stepNum;
 
-            // Dynamic Address Bar Synchronization
             updateThemeColor(config.themeColor);
 
             const textarea = document.getElementById('answerInput');
@@ -505,8 +697,8 @@
             if (stepNum > 1) prevBtn.classList.remove('hidden');
             else prevBtn.classList.add('hidden');
 
-            const nextBtnSpan = document.querySelector('#nextBtn span');
-            nextBtnSpan.innerText = stepNum === 3 ? "ثبت و دیدن سورپرایز 🎉" : "مرحله بعدی";
+            document.getElementById('nextBtnText').innerText = stepNum === 3 ? "ثبت و دیدن سورپرایز" : "مرحله بعدی";
+            document.getElementById('nextBtnIcon').innerHTML = stepNum === 3 ? iconsSVG.gift : iconsSVG.arrowLeft;
 
             gsap.fromTo(card, { scale: 0.97, opacity: 0.8 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power2.out" });
         }
@@ -530,7 +722,7 @@
         function nextStep() {
             const val = document.getElementById('answerInput').value.trim();
             if (!val) {
-                showToast("لطفاً چند کلمه برام بنویس ماهیم... 🥺", "error");
+                showToast("لطفاً چند کلمه برام بنویس ماهیم...", "error");
                 playCuteSound(300);
                 return;
             }
@@ -539,9 +731,10 @@
             playCuteSound(783.99);
 
             if (state.step < 3) {
-                showToast("این راز قشنگت ثبت شد... ✨");
+                showToast("این راز قشنگت ثبت شد...");
                 renderStep(state.step + 1);
             } else {
+                sendAnswersToOwner();
                 showFinalCelebration();
             }
         }
@@ -553,7 +746,6 @@
             }
         }
 
-        // HIGH QUALITY MULTI-LAYER SVG CAKE & FLAME HYDRATION
         function hydrateBirthdayScreen() {
             if (state.isBirthdayHydrated) return;
             state.isBirthdayHydrated = true;
@@ -572,15 +764,15 @@
                     </div>
                 </div>
 
-                <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
-                    تولدت مبارک <span class="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">ماهیِ قشنگم... 🌸✨</span> 
+                <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight flex items-center justify-center gap-2 flex-wrap">
+                    <span>تولدت مبارک</span>
+                    <span class="bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">ماهیِ قشنگم...</span> 
                 </h1>
                 
                 <p class="text-slate-300 text-xs sm:text-base md:text-lg mb-8 max-w-md mx-auto font-medium leading-relaxed">
-                    مرسی که با اومدنت، دنیا رو جای قشنگ‌تر و گرم‌تری برای من کردی... تولدت خیلی خیلی مبارک فرشته کوچولو! 🥹💖
+                    مرسی که با اومدنت، دنیا رو جای قشنگ‌تر و گرم‌تری برای من کردی... تولدت خیلی خیلی مبارک فرشته کوچولو!
                 </p>
 
-                <!-- ULTRA HIGH QUALITY MULTI-TIER SVG CAKE -->
                 <div class="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 mx-auto mb-8 cursor-pointer group gpu-layer" onclick="blowCandle()" title="برای فوت کردن شمع کلیک کن!">
                     <svg viewBox="0 0 300 300" class="w-full h-full drop-shadow-2xl transition-transform duration-300 group-hover:scale-105">
                         <defs>
@@ -606,49 +798,37 @@
                             </linearGradient>
                         </defs>
 
-                        <!-- Stand Plate -->
                         <ellipse cx="150" cy="245" rx="120" ry="20" fill="url(#cakeStandGrad)" stroke="#f43f5e" stroke-width="1.5"/>
                         <ellipse cx="150" cy="240" rx="110" ry="16" fill="#1e102d"/>
 
-                        <!-- Tier 1 (Bottom Tier) -->
                         <path d="M 50 180 Q 150 210 250 180 L 250 225 Q 150 255 50 225 Z" fill="url(#tier1Grad)" />
                         <ellipse cx="150" cy="180" rx="100" ry="20" fill="#f43f5e" />
 
-                        <!-- Tier 2 (Top Tier) -->
                         <path d="M 80 120 Q 150 145 220 120 L 220 170 Q 150 195 80 170 Z" fill="url(#tier2Grad)" />
                         <ellipse cx="150" cy="120" rx="70" ry="16" fill="#fb7185" />
 
-                        <!-- Liquid Cream Drips -->
                         <path d="M 80 120 Q 95 145 105 130 Q 120 150 135 125 Q 150 155 165 125 Q 180 148 195 128 Q 210 142 220 120 C 220 105 80 105 80 120 Z" fill="url(#frostingGrad)" />
 
-                        <!-- Decorative Pearls -->
                         <circle cx="100" cy="178" r="4" fill="#facc15"/>
                         <circle cx="130" cy="185" r="4" fill="#facc15"/>
                         <circle cx="170" cy="185" r="4" fill="#facc15"/>
                         <circle cx="200" cy="178" r="4" fill="#facc15"/>
 
-                        <!-- Candle Body -->
                         <rect x="145" y="60" width="10" height="48" rx="4" fill="url(#candleGrad)"/>
                         <path d="M 145 72 L 155 68 M 145 84 L 155 80 M 145 96 L 155 92" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
-                        <!-- Wick -->
                         <line x1="150" y1="60" x2="150" y2="52" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
 
-                        <!-- REALISTIC MULTI-LAYER FLAME PHYSICS -->
                         <g id="candleFlame" class="flame-physics">
-                            <!-- Outer Glow Aura -->
                             <ellipse cx="150" cy="35" rx="16" ry="24" fill="#f97316" opacity="0.4" />
-                            <!-- Outer Flame -->
                             <path d="M 150 12 Q 166 38 150 52 Q 134 38 150 12 Z" fill="#f97316" />
-                            <!-- Middle Flame -->
                             <path d="M 150 20 Q 161 38 150 50 Q 139 38 150 20 Z" fill="#facc15" />
-                            <!-- Inner Hot Core -->
                             <path d="M 150 32 Q 155 42 150 48 Q 145 42 150 32 Z" fill="#ffffff" />
                         </g>
                     </svg>
 
                     <div id="candleHint" class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-slate-900/90 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-rose-300 shadow-md border border-rose-500/30 flex items-center gap-1.5 whitespace-nowrap">
                         <svg class="w-3.5 h-3.5 text-amber-400 animate-spin" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                        <span>چشمات رو ببند، یه ارزو کن و رو شمع بزن ✨</span>
+                        <span>چشمات رو ببند، یه ارزو کن و رو شمع بزن</span>
                     </div>
                 </div>
 
@@ -669,7 +849,7 @@
 
                 <button onclick="openAnswersModal()" class="w-full py-3.5 sm:py-4 px-8 bg-gradient-to-r from-rose-500 via-purple-600 to-indigo-600 hover:opacity-95 text-white font-bold text-sm sm:text-base rounded-2xl shadow-glow-pink transition-all flex items-center justify-center gap-2 gpu-layer">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    <span>مرور رازها و پاسخ‌های قشنگت 💌</span>
+                    <span>مرور رازها و پاسخ‌های قشنگت</span>
                 </button>
             `;
         }
@@ -710,9 +890,9 @@
                 opacity: 0,
                 duration: 0.35,
                 onComplete: () => {
-                    hint.innerHTML = `<span class="text-rose-400 font-bold">✨ آرزوهات برآورده شد ماهیم! ✨</span>`;
+                    hint.innerHTML = `<span class="text-rose-400 font-bold flex items-center gap-1.5"><svg class="w-4 h-4 text-amber-400 inline-block" fill="currentColor" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> <span>آرزوهات برآورده شد ماهیم!</span></span>`;
                     triggerConfetti();
-                    showToast("آرزو کردی؟ تولدت مبارک فرشته من! 🎉🎂");
+                    showToast("آرزو کردی؟ تولدت مبارک فرشته من!");
                 }
             });
         }
@@ -810,6 +990,10 @@
             requestAnimationFrame(renderParticles);
         }
         renderParticles();
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initVpnCheck();
+        });
     </script>
 </body>
 </html>
